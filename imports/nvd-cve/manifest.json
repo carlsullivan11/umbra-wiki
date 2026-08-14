@@ -1,0 +1,10 @@
+{
+  "source": "nvd-cve",
+  "url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+  "count": 17,
+  "skipped_existing": 23,
+  "window_days": 7,
+  "limit": 40,
+  "incremental": true,
+  "fetched_at": "2026-08-14"
+}
