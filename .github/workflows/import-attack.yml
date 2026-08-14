@@ -1,0 +1,35 @@
+name: import-attack
+on:
+  workflow_dispatch:
+  schedule:
+    # ATT&CK publishes a few releases a year, so daily fetching of a 54 MB
+    # bundle would be wasteful. Monthly, offset from the CVE importers.
+    - cron: "20 5 1 * *"
+jobs:
+  attack:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Fixture tests first: never publish from a broken importer.
+      - name: Test importer
+        run: python -m pytest scripts/tests -q
+
+      - name: Import ATT&CK Enterprise
+        run: python scripts/importers/import_attack.py --out imports/mitre-attack
+
+      - name: Validate
+        run: python scripts/validate_corpus.py
+
+      - name: Commit
+        run: |
+          git config user.name "umbra-wiki-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add imports/mitre-attack meta/attribution/mitre-attack.md || true
+          git diff --staged --quiet || git commit -m "chore(import): refresh MITRE ATT&CK enterprise"
+          git push || true

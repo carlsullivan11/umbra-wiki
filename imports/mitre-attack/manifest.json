@@ -1,0 +1,8 @@
+{
+  "source": "mitre-attack",
+  "url": "https://raw.githubusercontent.com/mitre-attack/attack-stix-data/master/enterprise-attack/enterprise-attack.json",
+  "count": 697,
+  "skipped_retired": 161,
+  "attack_domain": "enterprise",
+  "fetched_at": "2026-08-14"
+}
