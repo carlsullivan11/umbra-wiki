@@ -1,0 +1,11 @@
+{
+  "source": "mitre-cwe",
+  "url": "https://cwe.mitre.org/data/xml/cwec_latest.xml.zip",
+  "count": 1245,
+  "weaknesses": 944,
+  "categories": 301,
+  "skipped_retired": 146,
+  "catalog_version": "4.20",
+  "catalog_date": "2026-04-30",
+  "fetched_at": "2026-08-14"
+}
