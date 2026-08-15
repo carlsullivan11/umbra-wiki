@@ -1,0 +1,18 @@
+{
+  "source": "ietf-rfc",
+  "url": "https://www.rfc-editor.org/rfc-index.xml",
+  "list": "lists/core-rfcs.txt",
+  "requested": 29,
+  "count": 29,
+  "missing": [],
+  "obsoleted_pages": [
+    "RFC7489",
+    "RFC6844",
+    "RFC5342",
+    "RFC8446",
+    "RFC6962",
+    "RFC5735"
+  ],
+  "curated": true,
+  "fetched_at": "2026-08-14"
+}

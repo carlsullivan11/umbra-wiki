@@ -10,10 +10,21 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 FM = re.compile(r"\A---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 
+# Documentation files that live beside content but are NOT wiki pages. This must
+# match the engine's own exclusion list (umbra/wiki/parse.py load_corpus) —
+# otherwise the validator rejects files the engine deliberately never indexes,
+# which is exactly what a per-importer README triggered.
+NON_PAGES = {"README.MD", "SCHEMA.MD", "CONTRIBUTING.MD", "LICENSE"}
+
 
 def main() -> int:
     errors = 0
-    pages = list(ROOT.joinpath("curated").rglob("*.md")) + list(ROOT.joinpath("imports").rglob("*.md"))
+    pages = [
+        p
+        for p in list(ROOT.joinpath("curated").rglob("*.md"))
+        + list(ROOT.joinpath("imports").rglob("*.md"))
+        if p.name.upper() not in NON_PAGES
+    ]
     for path in pages:
         text = path.read_text(encoding="utf-8")
         m = FM.match(text)

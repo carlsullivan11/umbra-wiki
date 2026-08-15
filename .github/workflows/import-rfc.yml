@@ -1,0 +1,38 @@
+name: import-rfc
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      # Re-import when the curated list changes — that is the main trigger,
+      # since the RFCs themselves rarely change once published.
+      - "lists/core-rfcs.txt"
+  schedule:
+    # Monthly catches status changes (an RFC becoming obsoleted by a newer one).
+    - cron: "50 4 3 * *"
+jobs:
+  rfc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test importer
+        run: python -m pytest scripts/tests -q
+
+      - name: Import curated RFCs
+        run: python scripts/importers/import_rfc.py --list lists/core-rfcs.txt --out imports/ietf-rfc
+
+      - name: Validate
+        run: python scripts/validate_corpus.py
+
+      - name: Commit
+        run: |
+          git config user.name "umbra-wiki-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add imports/ietf-rfc meta/attribution/ietf-rfc.md || true
+          git diff --staged --quiet || git commit -m "chore(import): refresh curated RFC pages"
+          git push || true
