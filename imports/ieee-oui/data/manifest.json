@@ -1,0 +1,18 @@
+{
+  "source": "ieee-oui",
+  "urls": {
+    "MA-L": "https://standards-oui.ieee.org/oui/oui.csv",
+    "MA-M": "https://standards-oui.ieee.org/oui28/mam.csv",
+    "MA-S": "https://standards-oui.ieee.org/oui36/oui36.csv"
+  },
+  "count": 53622,
+  "by_registry": {
+    "MA-L": 39944,
+    "MA-M": 6548,
+    "MA-S": 7133
+  },
+  "shared_prefixes": 2,
+  "format": "csv: prefix,bits,registry,vendor (sorted longest-prefix first)",
+  "lookup_rule": "longest prefix wins (36 -> 28 -> 24 bits)",
+  "fetched_at": "2026-08-14"
+}
