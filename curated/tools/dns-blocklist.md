@@ -2,12 +2,12 @@
 slug: tool/dns-blocklist
 title: Umbra DNS / Pi-hole blocklists
 page_type: tool
-tags: [dns, pihole, adguard, blocklist, malware, dnsbl]
+tags: [dns, pihole, adguard, blocklist, malware, adult, parental, dnsbl]
 related:
   - concept/email-authentication
 provenance: curated
 updated_at: 2026-08-20
-summary: "Free malware domain blocklists for Pi-hole, AdGuard Home, and hosts files — built from Umbra's owned abuse.ch lake."
+summary: "Free malware and adult-content domain blocklists for Pi-hole, AdGuard Home, and hosts files."
 sources:
   - name: abuse.ch URLhaus
     url: https://urlhaus.abuse.ch/
@@ -15,89 +15,79 @@ sources:
     url: https://threatfox.abuse.ch/
   - name: abuse.ch Feodo Tracker
     url: https://feodotracker.abuse.ch/
+  - name: Blocklist Project (porn)
+    url: https://github.com/blocklistproject/Lists
+  - name: StevenBlack hosts (porn-only)
+    url: https://github.com/StevenBlack/hosts
 ---
 
 # Umbra DNS blocklists
 
-Umbra publishes **malware infrastructure** hostnames and IPs from its **owned
-abuse.ch lake** (URLhaus, ThreatFox, Feodo). These are the same public CTI feeds
-Umbra already mirrors for collectors — **not** the result of scanning the public
-Internet.
+Umbra publishes free **DNS blocklists** you can paste into **Pi-hole**,
+**AdGuard Home**, **dnsmasq**, or a classic hosts file.
 
-Use them with **Pi-hole**, **AdGuard Home**, **dnsmasq**, or a classic hosts file.
+Two independent families:
 
-## Live feed URLs
+1. **Malware** — hostnames/IPs from Umbra’s **owned abuse.ch lake** (URLhaus,
+   ThreatFox, Feodo). Same CTI collectors use. Not Internet scanning.
+2. **Adult content** — domains from public filter projects (Blocklist Project +
+   StevenBlack porn lists), mirrored and re-served. Optional parental /
+   workplace filter.
 
-| Format | URL | Use with |
-|--------|-----|----------|
-| **Domains** (recommended) | `https://umbra-osint.com/lists/malware-domains.txt` | Pi-hole adlist, AdGuard DNS blocklist |
-| **Hosts file** | `https://umbra-osint.com/lists/malware-hosts.txt` | `/etc/hosts`, dnsmasq `addn-hosts` |
-| **Adblock** | `https://umbra-osint.com/lists/malware-adblock.txt` | uBlock Origin / browser lists |
-| **IPs** | `https://umbra-osint.com/lists/malware-ips.txt` | Firewall / IP blocking (not pure DNS) |
-| Index | `https://umbra-osint.com/lists/` | human-readable pointer |
+## Malware feeds
 
-Lists refresh from the lake on each request (short cache). Keep the **abuse.ch
-sync** timer healthy so the lake stays current.
+| Format | URL |
+|--------|-----|
+| **Domains** (recommended) | `https://umbra-osint.com/lists/malware-domains.txt` |
+| **Hosts file** | `https://umbra-osint.com/lists/malware-hosts.txt` |
+| **Adblock** | `https://umbra-osint.com/lists/malware-adblock.txt` |
+| **IPs** | `https://umbra-osint.com/lists/malware-ips.txt` |
+
+## Adult-content feeds
+
+| Format | URL |
+|--------|-----|
+| **Domains** (recommended) | `https://umbra-osint.com/lists/adult-domains.txt` |
+| **Hosts file** | `https://umbra-osint.com/lists/adult-hosts.txt` |
+| **Adblock** | `https://umbra-osint.com/lists/adult-adblock.txt` |
+
+Index of all lists: `https://umbra-osint.com/lists/`
 
 ## Pi-hole
 
-1. Open **Group Management → Adlists**
-2. Add:
+1. **Group Management → Adlists**
+2. Add one or both:
    ```text
    https://umbra-osint.com/lists/malware-domains.txt
+   https://umbra-osint.com/lists/adult-domains.txt
    ```
-3. **Tools → Update Gravity** (or wait for the next scheduled update)
-
-Optional: use the hosts format if your Pi-hole setup prefers hosts-style lists:
-
-```text
-https://umbra-osint.com/lists/malware-hosts.txt
-```
+3. **Tools → Update Gravity**
 
 ## AdGuard Home
 
-**Filters → DNS blocklists → Add blocklist → Add a custom list**
+**Filters → DNS blocklists → Add blocklist** for each URL above.
 
-- Name: `Umbra malware domains`
-- URL: `https://umbra-osint.com/lists/malware-domains.txt`
+## What is (and is not) on the lists
 
-## AdGuard / uBlock (browser)
+**Malware list**
 
-Subscribe to:
+- Hosts from URLhaus / ThreatFox / Feodo in Umbra’s lake
 
-```text
-https://umbra-osint.com/lists/malware-adblock.txt
-```
+**Adult list**
 
-## What is (and is not) on the list
+- Domains classified as adult by upstream open filter projects
 
-**On the list**
+**Neither list includes**
 
-- Hostnames seen serving malware URLs (URLhaus)
-- IOC hosts from ThreatFox
-- Botnet C2 IPs from Feodo Tracker
-
-**Not on the list**
-
-- Advertising / tracking (use dedicated ad lists)
-- Whole TLDs or “suspicious” heuristics without a feed hit
+- Advertising / tracking (use a dedicated ad list)
+- Whole TLDs without a feed hit
 - Private / loopback / CGNAT addresses
-- Results of Umbra **active** probing of random Internet hosts
+- Results of Umbra actively probing random Internet hosts
 
-## Attribution & terms
+False positives happen on any open list — whitelist locally when needed.
 
-- Upstream data: **abuse.ch** — respect their [terms](https://abuse.ch/) and
-  rate limits. Umbra redistributes a **filtered snapshot** of what it already
-  stores for OSINT collectors.
-- Blocking is **best-effort CTI**. False positives happen; whitelist locally when
-  needed. Absence from the list is **not** a clean bill of health.
+## Attribution
 
-## Local / offline
-
-If you run Umbra yourself and the API can see your lake:
-
-```bash
-curl -fsS http://localhost:8000/lists/malware-domains.txt | head
-```
-
-After `umbra abuse sync`, the list updates on the next fetch (cache ≤ ~15 minutes).
+- Malware: **abuse.ch** terms apply to upstream data
+- Adult: **Blocklist Project** and **StevenBlack/hosts** (see their repos)
+- Umbra packaging: MIT
