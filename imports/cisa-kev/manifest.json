@@ -1,8 +1,8 @@
 {
   "source": "cisa-kev",
   "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-  "count": 1676,
-  "catalogVersion": "2026.08.25",
-  "dateReleased": "2026-08-25T17:43:58.4301Z",
-  "fetched_at": "2026-08-26"
+  "count": 1685,
+  "catalogVersion": "2026.08.27",
+  "dateReleased": "2026-08-27T17:00:36.6632Z",
+  "fetched_at": "2026-08-27"
 }
