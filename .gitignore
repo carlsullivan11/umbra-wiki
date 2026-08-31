@@ -1,4 +1,5 @@
 
+.d3fend-cache/
 *.pyc
 __pycache__/
 .pytest_cache/

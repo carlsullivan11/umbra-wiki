@@ -1,0 +1,11 @@
+{
+  "source": "mitre-d3fend",
+  "ontology_url": "https://d3fend.mitre.org/ontologies/d3fend.json",
+  "pages": 272,
+  "pages_with_attack_mapping": 147,
+  "pages_without_attack_mapping": 125,
+  "attack_links": 5080,
+  "techniques_queried": 697,
+  "techniques_with_no_countermeasure": 273,
+  "imported_at": "2026-08-31"
+}
