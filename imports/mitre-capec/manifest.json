@@ -1,0 +1,12 @@
+{
+  "source": "mitre-capec",
+  "catalog_version": "3.9",
+  "catalog_date": "2023-01-24",
+  "url": "https://capec.mitre.org/data/xml/capec_latest.xml",
+  "pages": 558,
+  "skipped_retired": 57,
+  "cwe_links": 1211,
+  "attack_links": 256,
+  "dropped_links": 15,
+  "imported_at": "2026-08-31"
+}
