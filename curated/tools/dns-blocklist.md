@@ -5,6 +5,7 @@ page_type: tool
 tags: [dns, pihole, adguard, blocklist, malware, adult, parental, dnsbl]
 related:
   - concept/email-authentication
+  - tool/osint-resources
 provenance: curated
 updated_at: 2026-08-20
 summary: "Free malware and adult-content domain blocklists for Pi-hole, AdGuard Home, and hosts files."
