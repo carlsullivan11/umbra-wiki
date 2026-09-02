@@ -200,20 +200,6 @@ Umbra `/reputation` is the first-party check for domain/IP/phone. Wiki blocklist
 
 Never buy stolen dumps. Never run crimeware-primary tools. If a “source” is a forum selling access, it is out.
 
-## What Umbra already covers (do not rebuild)
-
-| Need | Umbra |
-|------|--------|
-| Domain/IP/phone reputation | `/reputation`, collectors `domain_reputation`, `ip_reputation`, `phone_validate` |
-| Malware infra / SSLBL | `umbra abuse sync`, `malware_infra`, `sslbl_cert` |
-| CT subdomains | `ct_lake`, `crtsh` |
-| Crypto OFAC | `/crypto`, `crypto_screen` |
-| Court opinions / RECAP | `court_records` |
-| County / land / corp portals | `county_records`, `/people/coverage` |
-| OSM cameras near packed cities | `umbra rf sync`, `wifi_maps` |
-| KEV / EPSS | wiki CVE pages, `cve_lookup`, `umbra epss` |
-| DNS blocklists | `/lists/*`, this wiki `tool/dns-blocklist` |
-
 ## How to add a source here
 
 Official or clearly licensed public portal, citable URL, one-line honesty about limits. No people-search vendors, no PACER scrapers, no map-UI harvest. Open a PR on `umbra-wiki` under `curated/tools/`.
