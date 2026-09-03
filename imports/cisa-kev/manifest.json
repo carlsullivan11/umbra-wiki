@@ -1,11 +1,11 @@
 {
   "source": "cisa-kev",
   "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
-  "count": 1687,
-  "catalogVersion": "2026.09.01",
-  "dateReleased": "2026-09-01T19:22:46.2162Z",
-  "entries_with_cwe": 1512,
+  "count": 1694,
+  "catalogVersion": "2026.09.02",
+  "dateReleased": "2026-09-02T16:54:39.8321Z",
+  "entries_with_cwe": 1519,
   "entries_without_cwe": 175,
-  "cwe_links": 1617,
-  "fetched_at": "2026-09-02"
+  "cwe_links": 1629,
+  "fetched_at": "2026-09-03"
 }
