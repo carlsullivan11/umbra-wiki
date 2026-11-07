@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install test deps
+        run: python -m pip install --quiet pytest
+
       - name: Test importer
         run: python -m pytest scripts/tests -q
 
